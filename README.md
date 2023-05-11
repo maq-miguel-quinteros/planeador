@@ -18,3 +18,7 @@ La web app Planeador pretende dar una organización estructurada a los contenido
 ## Desarrollo
 
 Para ampliar la información sobre el desarrollo de la web app consultar el archivo planeador_desarrollo.md
+
+```js
+let x =0;
+```
