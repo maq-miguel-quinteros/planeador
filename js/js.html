@@ -1,0 +1,39 @@
+<script>
+    function crearTablaContactos(){
+        let tabla = document.getElementById('tablaContactos');
+        if (tabla) tabla.remove();
+
+        google.script.run.withSuccessHandler(
+            function(obj){
+                
+                tabla = document.createElement('table');
+                tabla.id = "tablaContactos";
+
+                let tablaHead = document.createElement('thead');
+                let tablaBody = document.createElement('tbody');
+
+                Array.from(obj).forEach((filaActual, i) => {
+                    let fila = document.createElement('tr');
+
+                    filaActual.forEach(celdaActual =>{
+                        let celda = document.createElement('td');
+                        celda.textContent = celdaActual;
+                        fila.appendChild(celda);
+                    });
+                    if (i == 0){
+                        tablaHead.appendChild(fila);
+                        tabla.appendChild(tablaHead);
+                    }else {
+                        tablaBody.appendChild(fila);
+                    }                    
+                });
+                tablaHead.classList.add('table-dark')
+                tabla.appendChild(tablaBody);
+                tabla.classList.add('table', 'table-striped', 'border', 'bordes-3');
+
+                document.getElementById('seccionContactos').appendChild(tabla);
+            }
+
+        ).obtenerContactos();
+    }
+</script>
