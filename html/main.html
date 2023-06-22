@@ -1,11 +1,29 @@
 <main>
     <!-- botones -->
-    <section class="d-flex justify-content-center mb-4">        
+    <section class="d-flex justify-content-center mb-4">
         <button class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar contactos</button>
     </section>
-    
+
     <!-- tabla de contactos -->
     <section class="container-sm mb4 w-50" id="seccionContactos">
 
+    </section>
+
+    <!-- notificaciones -->
+    <section>
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <!-- Toast -->
+            <div id="notificacion" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+
+                <div class="toast-header p-0">
+                    <div class="icono-notificacion"><i id="iconoNotificacion" class=""></i></div>
+                    <strong class="me-auto" id="tituloNotificacion">Bootstrap</strong>
+                    <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+
+                <div class="toast-body" id="mensajeNotificacion"></div>
+            </div>
+        </div>
     </section>
 </main>
