@@ -1,7 +1,14 @@
+const HOJA = SpreadsheetApp.openById('1p8nVzMIh-5TTk2im7KkOUhAj7msbv_3zIFrgRMOtYFY').getActiveSheet();
+
 function doGet(){
 
-    // verificarArchivos();
+    return HtmlService.createTemplateFromFile('html/web')
+        .evaluate()
+        .setTitle('planeador');
+}
 
+function doPost(datos) {
+    insertarContacto(datos.parameter.nombre, datos.parameter.correo);
     return HtmlService.createTemplateFromFile('html/web')
         .evaluate()
         .setTitle('planeador');
@@ -12,12 +19,11 @@ function obtenerHtml(nombre){
 }
 
 function obtenerContactos(){
-    let hoja = SpreadsheetApp.openById('1p8nVzMIh-5TTk2im7KkOUhAj7msbv_3zIFrgRMOtYFY').getActiveSheet();
-    console.log(hoja);
-    let datos = hoja.getDataRange().getValues();
-    console.log(datos);
-    return datos;
+    return HOJA.getDataRange().getValues();
 }
 
-// function verificarArchivos(){}
+function insertarContacto(nombre, correo){
+    HOJA.appendRow([nombre, correo]);
+}
+
 

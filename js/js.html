@@ -15,7 +15,17 @@
         .obtenerContactos();
     };
 
-    function crearTablaContactosCorrectamente (obj){
+    function insertarContacto() {
+
+        // crear loader
+        crearLoaderAnillo('seccionContactos');
+
+        google.script.run.withSuccessHandler(crearTablaContactosCorrectamente)
+        .withFailureHandler(crearTablaContactosError)
+        .obtenerContactos();
+    };
+
+    function crearTablaContactosCorrectamente (obj){        
 
         tabla = document.createElement('table');
         tabla.id = "tablaContactos";
