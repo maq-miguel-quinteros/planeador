@@ -8,7 +8,7 @@ function doGet(){
 }
 
 function doPost(datos) {
-    insertarContacto(datos.parameter.nombre, datos.parameter.correo);
+    // insertarContacto(datos.parameter.nombre, datos.parameter.correo);
     return HtmlService.createTemplateFromFile('html/web')
         .evaluate()
         .setTitle('planeador');

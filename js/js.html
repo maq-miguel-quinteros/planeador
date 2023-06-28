@@ -16,14 +16,45 @@
     };
 
     function insertarContacto() {
+        
+        let nombre = document.getElementById('nombre').value;
+        let correo = document.getElementById('correo').value;
+
+        // eliminar tabla
+        eliminarTabla();
 
         // crear loader
         crearLoaderAnillo('seccionContactos');
 
-        google.script.run.withSuccessHandler(crearTablaContactosCorrectamente)
-        .withFailureHandler(crearTablaContactosError)
-        .obtenerContactos();
+        google.script.run.withSuccessHandler(contactoInsertadoCorrectamente)
+        .withFailureHandler(contactoInsertadoError)
+        .insertarContacto(nombre, correo);
     };
+
+    function contactoInsertadoCorrectamente(){
+        /* eliminamos los datos de los inputs */
+        document.getElementById('nombre').value = '';
+        document.getElementById('correo').value = '';
+
+        // mostrar notificación
+        crearNotificacionOK('Contacto insertado correctamente', 'Contacto OK');
+
+        // eliminar loader
+        eliminarLoader();
+
+        // mostramos la tabla
+        crearTablaContactos();
+    }
+
+    function contactoInsertadoError(){
+        crearNotificacionError('No se pudo crear el contacto', 'Error');
+
+        // eliminar loader
+        eliminarLoader();
+
+        // mostramos la tabla
+        crearTablaContactos();
+    }
 
     function crearTablaContactosCorrectamente (obj){        
 
