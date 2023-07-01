@@ -16,9 +16,11 @@
     };
 
     function insertarContacto() {
-        
+        // obtener datos
         let nombre = document.getElementById('nombre').value;
+        let apellido = document.getElementById('apellido').value;
         let correo = document.getElementById('correo').value;
+        let telf = document.getElementById('telf').value;
 
         // eliminar tabla
         eliminarTabla();
@@ -28,7 +30,7 @@
 
         google.script.run.withSuccessHandler(contactoInsertadoCorrectamente)
         .withFailureHandler(contactoInsertadoError)
-        .insertarContacto(nombre, correo);
+        .insertarContacto(nombre, apellido, correo, telf);
     };
 
     function contactoInsertadoCorrectamente(){
