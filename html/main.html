@@ -4,8 +4,8 @@
         <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()">Mostrar
             contactos</button>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
-            Nuevo contacto
+        <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">
+            Crear contacto
         </button>
 
         <!--        <form action="https://script.google.com/macros/s/AKfycbyjEg-SjcXoJfPiWMi95QH51aY_EMoNeCMPgdyJGrfF/dev" method="post" id="formulario">
@@ -57,7 +57,7 @@
         <div class="modal-lg modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tituloCrearContactoModal">Modal title</h5>
+                    <h5 class="modal-title" id="tituloModal">Modal title</h5>
                 </div>
                 <!-- formulario crear contacto -->
                 <form onsubmit="insertarContacto()" method="dialog" id="formulario">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear contacto</button>
+                        <button id="botonCrearModificar" type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear contacto</button>
                     </div>
                 </form>
             </div>
