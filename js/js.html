@@ -56,8 +56,8 @@
 
         document.getElementById('seccionContactos').appendChild(tabla);
 
-        // mostrar notificación de ok
-        crearNotificacionOK("Contactos obtenidos correctamente", "¡Todo en orden!");
+        /* mostrar notificación de ok
+        crearNotificacionOK("Contactos obtenidos correctamente", "¡Todo en orden!"); */
 
         // eliminar loader
         eliminarLoader();
@@ -316,31 +316,40 @@
     const ICONO_ERROR = 'bi-bug';
     const ICONO_ADVERTENCIA = 'bi-exclamation-square';
 
+    const LOTTIE_CHECK = 'https://assets9.lottiefiles.com/private_files/lf30_6fb0ljzp.json';
+    const LOTTIE_ADVERTENCIA = 'https://assets6.lottiefiles.com/private_files/lf30_ymbk2ey3.json';    
+    const LOTTIE_ERROR = 'https://assets6.lottiefiles.com/private_files/lf30_mabdntuj.json';
+    const LOTTIE_CONTACTO = 'https://assets7.lottiefiles.com/packages/lf20_sOjs8q/add_contact_05.json';
+    const LOTTIE_PAPELERA = 'https://assets7.lottiefiles.com/packages/lf20_1xoyq2ka.json';
+    
+    
+    
+
     function crearNotificacionOK(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_CHECK, '--color-verde-oscuro');
+        crearNotificacion(titulo, mensaje, LOTTIE_CHECK, '--color-verde-oscuro');
     }
 
     function crearNotificacionAdvertencia(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_ADVERTENCIA, '--color-amarillo-oscuro');
+        crearNotificacion(titulo, mensaje, LOTTIE_ADVERTENCIA, '--color-amarillo-oscuro');
     }
 
     function crearNotificacionError(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_ERROR, '--color-rojo-oscuro');
+        crearNotificacion(titulo, mensaje, LOTTIE_ERROR, '--color-rojo-oscuro');
     }
 
     function crearNotificacionContacto(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_CONTACTO, '--color-azul-oscuro');
+        crearNotificacion(titulo, mensaje, LOTTIE_CONTACTO, '--color-azul-oscuro');
     }
 
     function crearNotificacionBorrado(mensaje, titulo) {
-        crearNotificacion(titulo, mensaje, ICONO_PAPELERA, '--color-gris-oscuro');
+        crearNotificacion(titulo, mensaje, LOTTIE_PAPELERA, '--color-gris-oscuro');
 }
 
 
 
-    function crearNotificacion(titulo, mensaje, icono, color) {
+    function crearNotificacion(titulo, mensaje, lottie, color) {
         let notificacion = crearAtributosNotificacion();
-        let cabeceraNotificacion = crearCabeceraNotificacion(titulo, icono);
+        let cabeceraNotificacion = crearCabeceraNotificacion(titulo, lottie);
         let cuerpoNotificacion = crearCuerpoNotificacion(mensaje);
 
         // agregar cabecera y cuerpo
@@ -370,13 +379,16 @@
         return cuerpoNotificacion;
     }
 
-    function crearCabeceraNotificacion(titulo, icono) {
+    function crearCabeceraNotificacion(titulo, /*icono*/ lottie) {
         // crear cabecera
         let cabeceraNotificacion = document.createElement('div');
         cabeceraNotificacion.classList.add('toast-header', 'p-0');
 
-        // crear icono
-        crearIconoNotificacion(cabeceraNotificacion, icono);
+        /* crear icono
+        crearIconoNotificacion(cabeceraNotificacion, icono); */
+
+        // crear lottie
+        crearLottieNotificacion(cabeceraNotificacion, lottie);
 
         // crear titulo
         let tituloNotificacion = document.createElement('strong');
@@ -393,6 +405,22 @@
 
         let iconoNotificacion = document.createElement('i');
         iconoNotificacion.classList.add('bi', icono);
+
+        divIcono.appendChild(iconoNotificacion);
+        contenedor.appendChild(divIcono);
+    }
+
+    function crearLottieNotificacion(contenedor, lottie){
+        let divIcono = document.createElement('div');
+        let iconoNotificacion = document.createElement('lottie-player');
+
+        // establecer los atributos
+        iconoNotificacion.setAttribute('src', lottie);
+        iconoNotificacion.setAttribute('background', 'transparent');
+        iconoNotificacion.setAttribute('speed', '1');
+        iconoNotificacion.style.width = '3rem';
+        iconoNotificacion.style.height = '3rem';
+        iconoNotificacion.autoplay = true;
 
         divIcono.appendChild(iconoNotificacion);
         contenedor.appendChild(divIcono);
