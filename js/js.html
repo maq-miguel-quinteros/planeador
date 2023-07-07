@@ -98,7 +98,7 @@
         document.getElementById('correo').value = '';
 
         // mostrar notificación
-        crearNotificacionOK('Contacto insertado correctamente', 'Contacto OK');
+        crearNotificacionContacto('Contacto insertado correctamente', 'Contacto OK');
 
         // eliminar loader
         eliminarLoader();
@@ -203,7 +203,7 @@
 
     function contactoBorradoCorrectamente() {
         // mostrar notificación
-        crearNotificacionOK('Contacto borrado correctamente', 'Borrado OK');
+        crearNotificacionBorrado('Contacto borrado correctamente', 'Borrado OK');
 
         // eliminar loader
         eliminarLoader();
@@ -291,7 +291,7 @@
 
     function contactoModificadoCorrectamente() {
         // mostrar notificación
-        crearNotificacionOK('Contacto modificado correctamente', 'Modificado OK');
+        crearNotificacionContacto('Contacto modificado correctamente', 'Modificado OK');
 
         // eliminar loader
         eliminarLoader();
@@ -310,7 +310,35 @@
         crearTablaContactos();
     }
 
-    function crearNotificacion(titulo, icono, mensaje, color) {
+    const ICONO_CHECK = 'bi-check2-square';
+    const ICONO_PAPELERA = 'bi-trash';
+    const ICONO_CONTACTO = 'bi-person-plus-fill';
+    const ICONO_ERROR = 'bi-bug';
+    const ICONO_ADVERTENCIA = 'bi-exclamation-square';
+
+    function crearNotificacionOK(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, ICONO_CHECK, '--color-verde-oscuro');
+    }
+
+    function crearNotificacionAdvertencia(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, ICONO_ADVERTENCIA, '--color-amarillo-oscuro');
+    }
+
+    function crearNotificacionError(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, ICONO_ERROR, '--color-rojo-oscuro');
+    }
+
+    function crearNotificacionContacto(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, ICONO_CONTACTO, '--color-azul-oscuro');
+    }
+
+    function crearNotificacionBorrado(mensaje, titulo) {
+        crearNotificacion(titulo, mensaje, ICONO_PAPELERA, '--color-gris-oscuro');
+}
+
+
+
+    function crearNotificacion(titulo, mensaje, icono, color) {
         let notificacion = crearAtributosNotificacion();
         let cabeceraNotificacion = crearCabeceraNotificacion(titulo, icono);
         let cuerpoNotificacion = crearCuerpoNotificacion(mensaje);
