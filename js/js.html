@@ -1,8 +1,8 @@
 <script>
-    /* const NOTIFICACION_OK = 1;
-    const NOTIFICACION_DANGER = 2;
-    const NOTIFICACION_WARNING = 3; */
 
+
+
+    /*  CREA LA TABLA CONTACTOS CUANDO LO SOLICITAMOS DESDE EL BOTÓN */
     function crearTablaContactos() {
         // borrar tabla
         eliminarTabla();
@@ -10,54 +10,15 @@
         // crear loader
         crearLoaderAnillo('seccionContactos');
 
+        /* LLAMAMOS A LA FUNCIÓN DE GOOGLE QUE TRAE LOS DATOS DEL SHEET */
+        // la función es obtenerContactos y está en el archivo functions.js
         google.script.run.withSuccessHandler(crearTablaContactosCorrectamente)
             .withFailureHandler(crearTablaContactosError)
             .obtenerContactos();
     };
 
-    function insertarContacto() {
-        // obtener datos
-        let nombre = document.getElementById('nombre').value;
-        let apellido = document.getElementById('apellido').value;
-        let correo = document.getElementById('correo').value;
-        let telf = document.getElementById('telf').value;
-
-        // eliminar tabla
-        eliminarTabla();
-
-        // crear loader
-        crearLoaderAnillo('seccionContactos');
-
-        google.script.run.withSuccessHandler(contactoInsertadoCorrectamente)
-            .withFailureHandler(contactoInsertadoError)
-            .insertarContacto(nombre, apellido, correo, telf);
-    };
-
-    function contactoInsertadoCorrectamente() {
-        /* eliminamos los datos de los inputs */
-        document.getElementById('nombre').value = '';
-        document.getElementById('correo').value = '';
-
-        // mostrar notificación
-        crearNotificacionOK('Contacto insertado correctamente', 'Contacto OK');
-
-        // eliminar loader
-        eliminarLoader();
-
-        // mostramos la tabla
-        crearTablaContactos();
-    }
-
-    function contactoInsertadoError() {
-        crearNotificacionError('No se pudo crear el contacto', 'Error');
-
-        // eliminar loader
-        eliminarLoader();
-
-        // mostramos la tabla
-        crearTablaContactos();
-    }
-
+    /* FUNCIÓN QUE SE EJECUTA SI LOS DATOS SON TRAÍDOS CORRECTAMENTE */
+    // los datos son devueltos a la función mediante una variable obj, que es un objeto
     function crearTablaContactosCorrectamente(obj) {
 
         tabla = document.createElement('table');
@@ -102,6 +63,7 @@
         eliminarLoader();
     }
 
+    /* FUNCIÓN QUE SE EJECUTA SI LOS DATOS NO SON TRAÍDOS CORRECTAMENTE */
     function crearTablaContactosError() {
         // mostrar notificación de error
         crearNotificacionError("No se pudieron leer los contactos", "¡Error!");
@@ -110,57 +72,55 @@
         eliminarLoader();
     }
 
-    function crearNotificacion(mensaje, titulo) {
 
-        let elementoNotificacion = document.getElementById('notificacion');
 
-        document.getElementById('mensajeNotificacion').textContent = mensaje;
-        document.getElementById('tituloNotificacion').textContent = titulo;
+    function insertarContacto() {
+        // obtener datos
+        let nombre = document.getElementById('nombre').value;
+        let apellido = document.getElementById('apellido').value;
+        let correo = document.getElementById('correo').value;
+        let telf = document.getElementById('telf').value;
 
-        bootstrap.Toast.getOrCreateInstance(elementoNotificacion).show();
+        // eliminar tabla
+        eliminarTabla();
 
+        // crear loader
+        crearLoaderAnillo('seccionContactos');
+
+        google.script.run.withSuccessHandler(contactoInsertadoCorrectamente)
+            .withFailureHandler(contactoInsertadoError)
+            .insertarContacto(nombre, apellido, correo, telf);
+    };
+
+    function contactoInsertadoCorrectamente() {
+        /* eliminamos los datos de los inputs */
+        document.getElementById('nombre').value = '';
+        document.getElementById('correo').value = '';
+
+        // mostrar notificación
+        crearNotificacionOK('Contacto insertado correctamente', 'Contacto OK');
+
+        // eliminar loader
+        eliminarLoader();
+
+        // mostramos la tabla
+        crearTablaContactos();
     }
 
-    function crearNotificacionOK(mensaje, titulo) {
-        crearNotificacion(mensaje, titulo);
-        crearIconoNotificacionOK();
-        crearColorNotificacion('--color-verde-oscuro');
+    function contactoInsertadoError() {
+        crearNotificacionError('No se pudo crear el contacto', 'Error');
+
+        // eliminar loader
+        eliminarLoader();
+
+        // mostramos la tabla
+        crearTablaContactos();
     }
 
-    function crearNotificacionError(mensaje, titulo) {
-        crearNotificacion(mensaje, titulo);
-        crearIconoNotificacionError();
-        crearColorNotificacion('--color-rojo-oscuro');
-    }
-
-    function crearNotificacionAdvertencia(mensaje, titulo) {
-        crearNotificacion(mensaje, titulo);
-        crearIconoNotificacionAdvertencia();
-        crearColorNotificacion('--color-amarillo-oscuro');
-    }
-
-    function crearIconoNotificacionOK() {
-        document.getElementById('iconoNotificacion').className = '';
-        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-check2-square');
 
 
-    }
 
-    function crearIconoNotificacionError() {
-        document.getElementById('iconoNotificacion').className = '';
-        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-bug');
-    }
 
-    function crearIconoNotificacionAdvertencia() {
-        document.getElementById('iconoNotificacion').className = '';
-        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-exclamation-square');
-    }
-
-    function crearColorNotificacion(color) {
-        let elementoNotificacion = document.getElementById('notificacion');
-        elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
-
-    }
 
     function crearLoader(elementoPadre) {
         eliminarLoader()
@@ -262,7 +222,7 @@
         crearTablaContactos();
     }
 
-    function abrirModalCrearContacto(){
+    function abrirModalCrearContacto() {
         // boton crear
         let boton = document.getElementById('botonCrearModificar');
         boton.textContent = "Crear contacto";
@@ -285,7 +245,7 @@
         bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
     }
 
-    function abriModalModificarContacto(numFila, datosContacto){
+    function abriModalModificarContacto(numFila, datosContacto) {
         // boton modificar
         let boton = document.getElementById('botonCrearModificar');
         boton.textContent = "Modificar contacto";
@@ -326,7 +286,7 @@
 
         google.script.run.withSuccessHandler(contactoModificadoCorrectamente)
             .withFailureHandler(contactoModificadoError)
-            .modificarContacto(numFila, {nombre, apellido, correo, telf} );
+            .modificarContacto(numFila, { nombre, apellido, correo, telf });
     }
 
     function contactoModificadoCorrectamente() {
@@ -349,9 +309,83 @@
         // mostramos la tabla
         crearTablaContactos();
     }
-    // $('#crearContactoModal').modal('show');
 
+    function crearNotificacion(titulo, icono, mensaje, color) {
+        let notificacion = crearAtributosNotificacion();
+        let cabeceraNotificacion = crearCabeceraNotificacion(titulo, icono);
+        let cuerpoNotificacion = crearCuerpoNotificacion(mensaje);
+
+        // agregar cabecera y cuerpo
+        notificacion.appendChild(cabeceraNotificacion);
+        notificacion.appendChild(cuerpoNotificacion);
+
+        // establecer el color
+        notificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
+
+        // evento que remueve la notificación
+        notificacion.addEventListener('hidden.bs.toast', function () {
+            this.remove;
+        });
+
+        // agregamos al contener de notificaciones
+        document.getElementById('contenedorNotificaciones').appendChild(notificacion);
+
+        // crear instancia y mostrar
+        bootstrap.Toast.getOrCreateInstance(notificacion).show();
+
+    }
+
+    function crearCuerpoNotificacion(mensaje) {
+        let cuerpoNotificacion = document.createElement('div');
+        cuerpoNotificacion.classList.add('toast-body');
+        cuerpoNotificacion.textContent = mensaje;
+        return cuerpoNotificacion;
+    }
+
+    function crearCabeceraNotificacion(titulo, icono) {
+        // crear cabecera
+        let cabeceraNotificacion = document.createElement('div');
+        cabeceraNotificacion.classList.add('toast-header', 'p-0');
+
+        // crear icono
+        crearIconoNotificacion(cabeceraNotificacion, icono);
+
+        // crear titulo
+        let tituloNotificacion = document.createElement('strong');
+        tituloNotificacion.classList.add('mx-2');
+        tituloNotificacion.textContent = titulo;
+
+        cabeceraNotificacion.appendChild(tituloNotificacion);
+        return cabeceraNotificacion;
+    }
+
+    function crearIconoNotificacion(contenedor, icono) {
+        let divIcono = document.createElement('div');
+        divIcono.classList.add('icono-notificacion');
+
+        let iconoNotificacion = document.createElement('i');
+        iconoNotificacion.classList.add('bi', icono);
+
+        divIcono.appendChild(iconoNotificacion);
+        contenedor.appendChild(divIcono);
+    }
+
+    function crearAtributosNotificacion() {
+        let notificacion = document.createElement('div');
+        notificacion.classList.add('toast', 'align-items-center', 'text-white', 'border-0');
+        notificacion.setAttribute('role', 'alert');
+        notificacion.setAttribute('area-live', 'assertive');
+        notificacion.setAttribute('aria-atomic', 'true');
+        return notificacion;
+    }
+
+
+</script>
+
+
+<script>
     /*
+
     
         function crearNotificacionOLD(tipo, mensaje, titulo){
             // obtener datos
@@ -391,5 +425,63 @@
             
             // mostrar la notificación
             notificacion.show();
-        } */
+        } 
+
+            const NOTIFICACION_OK = 1;
+    const NOTIFICACION_DANGER = 2;
+    const NOTIFICACION_WARNING = 3; 
+
+    function crearNotificacion(mensaje, titulo) {
+
+        let elementoNotificacion = document.getElementById('notificacion');
+
+        document.getElementById('mensajeNotificacion').textContent = mensaje;
+        document.getElementById('tituloNotificacion').textContent = titulo;
+
+        bootstrap.Toast.getOrCreateInstance(elementoNotificacion).show();
+
+    }
+
+    function crearNotificacionOK(mensaje, titulo) {
+        crearNotificacion(mensaje, titulo);
+        crearIconoNotificacionOK();
+        crearColorNotificacion('--color-verde-oscuro');
+    }
+
+    function crearNotificacionError(mensaje, titulo) {
+        crearNotificacion(mensaje, titulo);
+        crearIconoNotificacionError();
+        crearColorNotificacion('--color-rojo-oscuro');
+    }
+
+    function crearNotificacionAdvertencia(mensaje, titulo) {
+        crearNotificacion(mensaje, titulo);
+        crearIconoNotificacionAdvertencia();
+        crearColorNotificacion('--color-amarillo-oscuro');
+    }
+
+    function crearIconoNotificacionOK() {
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-check2-square');
+
+
+    }
+
+    function crearIconoNotificacionError() {
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-bug');
+    }
+
+    function crearIconoNotificacionAdvertencia() {
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi', 'bi-exclamation-square');
+    }
+
+    function crearColorNotificacion(color) {
+        let elementoNotificacion = document.getElementById('notificacion');
+        elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
+
+    }
+
+    */
 </script>

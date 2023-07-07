@@ -8,21 +8,7 @@
             Crear contacto
         </button>
 
-        <!--        <form action="https://script.google.com/macros/s/AKfycbyjEg-SjcXoJfPiWMi95QH51aY_EMoNeCMPgdyJGrfF/dev" method="post" id="formulario">
 
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Introduce el nombre del cotnacto</label>
-                <input type="text" class="form-control" name="nombre" id="nombre">
-
-            </div>
-            <div class="mb-3">
-                <label for="correo" class="form-label">Introduce el correo</label>
-                <input type="email" class="form-control" name="correo" id="correo">
-            </div>
-
-            <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar contactos</button>
-            <button type="submit" class="btn btn-primary">Crear contacto</button>
-        </form> -->
 
 
     </section>
@@ -35,19 +21,12 @@
     <!-- notificaciones -->
     <section>
 
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <!-- Toast -->
-            <div id="notificacion" class="toast align-items-center text-white border-0" role="alert"
-                aria-live="assertive" aria-atomic="true">
+        <div class="div-notificaciones toast-container position-fixed bottom-0 end-0 p-3" id="contenedorNotificaciones">
+            <!-- aquí vamos a poner las notificaciones con JS -->
 
-                <div class="toast-header p-0">
-                    <div class="icono-notificacion"><i id="iconoNotificacion" class=""></i></div>
-                    <strong class="me-auto" id="tituloNotificacion">Bootstrap</strong>
-                    <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
 
-                <div class="toast-body" id="mensajeNotificacion"></div>
-            </div>
+
+
         </div>
     </section>
 
@@ -67,12 +46,14 @@
                             <div class="col-4">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <!-- pattern restringe por expresión regular el nombre a solo letras y title es un mensaje si no se cumple pattern -->
-                                <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]*" title="El nombre no puede contener números">
+                                <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]*"
+                                    title="El nombre no puede contener números">
                             </div>
                             <div class="col-8">
                                 <label for="apellido" class="form-label">Apellido</label>
                                 <!-- indicamos que puede tener cualquier cosa menos los números de 0 a 9 -->
-                                <input type="text" class="form-control" name="apellido" id="apellido" pattern="[^0-9]*" title="El apellido no puede contener números" required>
+                                <input type="text" class="form-control" name="apellido" id="apellido" pattern="[^0-9]*"
+                                    title="El apellido no puede contener números" required>
                             </div>
                         </div>
                         <!-- correo y teléfono -->
@@ -81,16 +62,47 @@
                             <input type="email" class="form-control me-4" name="correo" id="correo">
                             <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
                             <!-- con \d indicamos que puede tener solo números con un rango de caracteres de 9 a 11 -->
-                            <input type="tel" class="form-control" name="telf" id="telf" pattern="[\d]{9,11}" title="El teléfono tiene que tener solo números de 9 a 11 caracteres">
+                            <input type="tel" class="form-control" name="telf" id="telf" pattern="[\d]{9,11}"
+                                title="El teléfono tiene que tener solo números de 9 a 11 caracteres">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button id="botonCrearModificar" type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear contacto</button>
+                        <button id="botonCrearModificar" type="submit" class="btn btn-success"
+                            data-bs-dismiss="modal">Crear contacto</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <!--        <form action="https://script.google.com/macros/s/AKfycbyjEg-SjcXoJfPiWMi95QH51aY_EMoNeCMPgdyJGrfF/dev" method="post" id="formulario">
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Introduce el nombre del cotnacto</label>
+                <input type="text" class="form-control" name="nombre" id="nombre">
+
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Introduce el correo</label>
+                <input type="email" class="form-control" name="correo" id="correo">
+            </div>
+
+            <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar contactos</button>
+            <button type="submit" class="btn btn-primary">Crear contacto</button>
+        </form> -->
+
+    <!-- Toast anterior -->
+    <!--            <div id=" notificacion" class="toast align-items-center text-white border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+
+                <div class="toast-header p-0">
+                    <div class="icono-notificacion"><i id="iconoNotificacion" class=""></i></div>
+                    <strong class="me-auto" id="tituloNotificacion">Bootstrap</strong>
+                    <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+
+                <div class="toast-body" id="mensajeNotificacion"></div>
+            </div> -->
 
 </main>
