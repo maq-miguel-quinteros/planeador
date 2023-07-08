@@ -34,3 +34,37 @@ function modificarContacto(numFila, datosContacto){
     let celdas = HOJA.getRange('A'+numFila+':D'+numFila);
     celdas.setValues([[datosContacto.nombre, datosContacto.apellido, datosContacto.correo, datosContacto.telf]]);
 }
+
+function importarContactos(){
+    let url = 'https://randomuser.me/api/?results=5&inc=name,email,phone';
+    let respuesta = UrlFetchApp.fetch(url).getContentText();
+    let datos = JSON.parse(respuesta);
+    datos.results.forEach(insertarContactoJSON);
+}
+
+function insertarContactoJSON(contacto){
+    HOJA.appendRow([contacto.name.first, contacto.name.last, contacto.email, contacto.phone]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
